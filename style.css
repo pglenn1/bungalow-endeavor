@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Light blue to light purple gradient */
 }
 
 .container {
