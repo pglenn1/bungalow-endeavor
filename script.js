@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isJumping = false;
     let score = 0;
-    let obstacleSpeed = 2;
+    let obstacleSpeed = 5;
     let jumpHeight = 0;
  
     function jump() {
