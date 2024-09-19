@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Guessing Game</title>
+    <title>T-Rex Runner Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background: linear-gradient(135deg, #74ebd5, #acb6e5);">
-    <div class="container">
-        <h1>Guess the Number</h1>
-        <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
-        <input type="number" id="guess" placeholder="Enter your guess">
-        <button id="submitGuess">Submit Guess</button>
-        <p id="result"></p>
-        <button id="restartGame" style="display: none;">Play Again</button>
+<body>
+    <div class="game-container">
+        <div class="dino" id="dino"></div>
+        <div class="obstacle" id="obstacle"></div>
+        <div class="score" id="score">Score: 0</div>
     </div>
     <script src="script.js"></script>
 </body>
