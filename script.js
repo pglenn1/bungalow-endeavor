@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     let obstacleSpeed = 2;
     let jumpHeight = 0;
-
+ 
     function jump() {
         if (!isJumping) {
             isJumping = true;
