@@ -18,12 +18,14 @@ function jump() {
     }, 500);
 }
 
+// Ensure the event listener captures the spacebar correctly
 document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space') { // Ensure jump is triggered by spacebar
+    if (event.code === 'Space') { // Space key
         jump();
     }
 });
 
+// Create an obstacle
 function createObstacle() {
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
@@ -33,6 +35,7 @@ function createObstacle() {
     moveObstacle(obstacle);
 }
 
+// Move the obstacle across the screen
 function moveObstacle(obstacle) {
     let obstacleInterval = setInterval(() => {
         let rightPosition = parseInt(obstacle.style.right);
@@ -48,6 +51,7 @@ function moveObstacle(obstacle) {
     }, 20);
 }
 
+// Check for collision between the dino and the obstacle
 function checkCollision(obstacle, obstacleInterval) {
     const dinoRect = dino.getBoundingClientRect();
     const obstacleRect = obstacle.getBoundingClientRect();
@@ -65,6 +69,7 @@ function checkCollision(obstacle, obstacleInterval) {
     }
 }
 
+// Start the game
 function startGame() {
     score = 0;
     scoreDisplay.textContent = 'Score: 0';
@@ -77,6 +82,7 @@ function startGame() {
     }
 }
 
+// Reset the game
 function resetGame() {
     startGame();
 }
