@@ -1,92 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const dino = document.getElementById('dino');
-    const obstacle = document.getElementById('obstacle');
-    const scoreElement = document.getElementById('score');
+let dino = document.getElementById('dino');
+let scoreDisplay = document.getElementById('score');
+let gameOverDisplay = document.getElementById('game-over');
+let finalScoreDisplay = document.getElementById('final-score');
+let score = 0;
+let isJumping = false;
+let obstacles = [];
+let obstacleCount = 3; // Number of obstacles
 
-    let isJumping = false;
-    let score = 0;
-    let obstacleSpeed = 5;
-    let jumpHeight = 0;
+function jump() {
+    if (isJumping) return;
+    isJumping = true;
+    dino.classList.add('jump');
 
-    function jump() {
-        if (!isJumping) {
-            isJumping = true;
-            jumpHeight = 0;
-            const jumpInterval = setInterval(() => {
-                if (jumpHeight < 100) {
-                    dino.style.bottom = `${20 + jumpHeight}px`;
-                    jumpHeight += 10;
-                } else {
-                    clearInterval(jumpInterval);
-                    const fallInterval = setInterval(() => {
-                        if (jumpHeight > 0) {
-                            dino.style.bottom = `${20 + jumpHeight}px`;
-                            jumpHeight -= 10;
-                        } else {
-                            clearInterval(fallInterval);
-                            dino.style.bottom = '20px';
-                            isJumping = false;
-                        }
-                    }, 20);
-                }
-            }, 20);
+    setTimeout(() => {
+        dino.classList.remove('jump');
+        isJumping = false;
+    }, 500);
+}
+
+document.addEventListener('keydown', jump);
+
+function createObstacle() {
+    const obstacle = document.createElement('div');
+    obstacle.classList.add('obstacle');
+    obstacle.style.right = '-30px'; // Start off-screen
+    document.querySelector('.game-container').appendChild(obstacle);
+    obstacles.push(obstacle);
+    moveObstacle(obstacle);
+}
+
+function moveObstacle(obstacle) {
+    let obstacleInterval = setInterval(() => {
+        let rightPosition = parseInt(obstacle.style.right);
+        if (rightPosition >= window.innerWidth) {
+            obstacle.remove();
+            clearInterval(obstacleInterval);
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+        } else {
+            obstacle.style.right = `${rightPosition + 5}px`; // Adjust speed as needed
         }
+        checkCollision(obstacle, obstacleInterval);
+    }, 20);
+}
+
+function checkCollision(obstacle, obstacleInterval) {
+    const dinoRect = dino.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+
+    if (
+        dinoRect.x < obstacleRect.x + obstacleRect.width &&
+        dinoRect.x + dinoRect.width > obstacleRect.x &&
+        dinoRect.y < obstacleRect.y + obstacleRect.height &&
+        dinoRect.y + dinoRect.height > obstacleRect.y
+    ) {
+        gameOverDisplay.style.display = 'block';
+        finalScoreDisplay.textContent = score;
+        obstacles.forEach(obs => obs.remove()); // Remove all obstacles
+        clearInterval(obstacleInterval); // Stop moving obstacle
     }
+}
 
-    function checkCollision() {
-        const dinoRect = dino.getBoundingClientRect();
-        const obstacleRect = obstacle.getBoundingClientRect();
+function startGame() {
+    score = 0;
+    scoreDisplay.textContent = 'Score: 0';
+    gameOverDisplay.style.display = 'none';
+    obstacles.forEach(obs => obs.remove()); // Remove existing obstacles
+    obstacles = []; // Reset obstacles array
 
-        return (
-            dinoRect.left < obstacleRect.right &&
-            dinoRect.right > obstacleRect.left &&
-            dinoRect.top < obstacleRect.bottom &&
-            dinoRect.bottom > obstacleRect.top
-        );
+    for (let i = 0; i < obstacleCount; i++) {
+        createObstacle();
     }
+}
 
-    function moveObstacle() {
-        let obstaclePosition = window.innerWidth;
-        const obstacleInterval = setInterval(() => {
-            if (obstaclePosition > -30) {
-                obstaclePosition -= obstacleSpeed;
-                obstacle.style.right = `${obstaclePosition}px`;
+function resetGame() {
+    startGame();
+}
 
-                if (checkCollision() && !isJumping) {
-                    gameOver();
-                }
-
-                if (obstaclePosition <= 0) {
-                    score += 10;
-                    scoreElement.textContent = `Score: ${score}`;
-                    obstaclePosition = window.innerWidth;
-                    obstacleSpeed += 0.1; // Gradually increase speed
-                }
-            } else {
-                clearInterval(obstacleInterval);
-                moveObstacle();
-            }
-        }, 20);
-    }
-
-    function resetGame() {
-        score = 0;
-        scoreElement.textContent = `Score: ${score}`;
-        obstacle.style.right = '-50px';
-        obstacleSpeed = 5;
-        document.getElementById('game-over').style.display = 'none';
-    }
-
-    function gameOver() {
-        document.getElementById('final-score').textContent = score;
-        document.getElementById('game-over').style.display = 'block';
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') {
-            jump();
-        }
-    });
-
-    moveObstacle();
-});
+// Start generating obstacles every 1 second
+setInterval(createObstacle, 1000);
