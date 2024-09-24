@@ -17,11 +17,25 @@ body {
 .dino {
     position: absolute;
     bottom: 20px;
-    left: 500px; /* Move the dino further right */
-    width: 40px;
-    height: 40px;
-    background-color: #555;
-    border-radius: 4px;
+    left: 50px; 
+    width: 50px;
+    height: 30px;
+    background-color: #555; /* Body color */
+    border-radius: 10px 10px 0 0; /* Rounded top corners */
+
+    /* Add a tail */
+    clip-path: polygon(0 0, 50% 50%, 0 100%); /* Creates a triangle shape for the tail */
+}
+
+.dino::after {
+    content: '';
+    position: absolute;
+    top: -10px; /* Adjusts the head position */
+    left: 40px; /* Adjusts head position */
+    width: 20px;
+    height: 20px;
+    background-color: #555; /* Head color */
+    border-radius: 50%; /* Makes a circular head */
 }
 
 .obstacle {
@@ -30,7 +44,7 @@ body {
     right: -30px; /* Starting off the screen */
     width: 30px;
     height: 30px;
-    background-color: #f00;
+    background-color: #f00; /* Obstacle color */
     border-radius: 4px;
 }
 
@@ -40,6 +54,8 @@ body {
     left: 20px;
     font-size: 24px;
     font-weight: bold;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 #game-over {
@@ -48,8 +64,9 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background: #fff;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
     border: 2px solid #000;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
