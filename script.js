@@ -18,12 +18,16 @@ function jump() {
     }, 500);
 }
 
-document.addEventListener('keydown', jump);
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') { // Ensure jump is triggered by spacebar
+        jump();
+    }
+});
 
 function createObstacle() {
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
-    obstacle.style.right = '-30px'; // Start off-screen
+    obstacle.style.right = '-30px'; // Start off-screen from the right
     document.querySelector('.game-container').appendChild(obstacle);
     obstacles.push(obstacle);
     moveObstacle(obstacle);
@@ -38,7 +42,7 @@ function moveObstacle(obstacle) {
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
         } else {
-            obstacle.style.right = `${rightPosition + 5}px`; // Adjust speed as needed
+            obstacle.style.right = `${rightPosition + 5}px`; // Move left across the screen
         }
         checkCollision(obstacle, obstacleInterval);
     }, 20);
