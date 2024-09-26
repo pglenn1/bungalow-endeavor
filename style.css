@@ -7,6 +7,7 @@
     background-color: #555; /* Body color */
     border-radius: 10px 10px 0 0; /* Rounded top corners */
     clip-path: polygon(0 0, 50% 50%, 0 100%); /* Tail shape */
+    transition: transform 0.2s; /* Smooth transform on jump */
 }
 
 .dino::after {
@@ -22,9 +23,17 @@
 
 .dino.jump {
     animation: jump 0.5s ease forwards;
+    transform: rotate(-15deg); /* Slight rotation during jump */
 }
 
 @keyframes jump {
     0%, 100% { bottom: 20px; }
     50% { bottom: 150px; } /* Increase the height of the jump */
+}
+
+.obstacle {
+    position: absolute;
+    bottom: 20px; /* Align with the dino */
+    width: 20px; /* Adjust width */
+    background-color: #dc3545; /* Red for visibility */
 }
