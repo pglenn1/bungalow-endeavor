@@ -6,6 +6,7 @@ let score = 0;
 let isJumping = false;
 let obstacles = [];
 let obstacleCount = 3; // Number of obstacles
+let obstacleInterval; // For obstacle creation interval
 
 function jump() {
     if (isJumping) return;
@@ -18,9 +19,9 @@ function jump() {
     }, 500);
 }
 
-// Ensure the event listener captures the spacebar correctly
+// Capture the spacebar for jumping
 document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space') { // Space key
+    if (event.code === 'Space') {
         jump();
     }
 });
@@ -30,6 +31,7 @@ function createObstacle() {
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
     obstacle.style.right = '-30px'; // Start off-screen from the right
+    obstacle.style.height = `${Math.random() * 60 + 20}px`; // Random height
     document.querySelector('.game-container').appendChild(obstacle);
     obstacles.push(obstacle);
     moveObstacle(obstacle);
@@ -66,6 +68,7 @@ function checkCollision(obstacle, obstacleInterval) {
         finalScoreDisplay.textContent = score;
         obstacles.forEach(obs => obs.remove()); // Remove all obstacles
         clearInterval(obstacleInterval); // Stop moving obstacle
+        clearInterval(obstacleInterval); // Clear the obstacle creation interval
     }
 }
 
@@ -77,9 +80,9 @@ function startGame() {
     obstacles.forEach(obs => obs.remove()); // Remove existing obstacles
     obstacles = []; // Reset obstacles array
 
-    for (let i = 0; i < obstacleCount; i++) {
-        createObstacle();
-    }
+    // Clear any existing obstacle interval
+    clearInterval(obstacleInterval);
+    obstacleInterval = setInterval(createObstacle, 1000); // Start generating obstacles
 }
 
 // Reset the game
@@ -87,5 +90,5 @@ function resetGame() {
     startGame();
 }
 
-// Start generating obstacles every 1 second
-setInterval(createObstacle, 1000);
+// Start the game on load
+startGame();
