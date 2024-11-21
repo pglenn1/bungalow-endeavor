@@ -24,7 +24,7 @@ This repo is for the SOBIE conference website. This repo is organized by CSIS st
 
 ### Main Work Areas
 This area highlights what each team of the FALL 2024 team worked on to make the sobieconference website 
-- INFRA: <a href="https://github.com/barrycumbie/sobieconference.org/issues/81" target="_blank">#81, </a><a href="https://github.com/barrycumbie/sobieconference.org/issues/86" target="_blank">#86</a>
+- INFRA: <a href="https://github.com/barrycumbie/sobieconference.org/issues/81" target="_blank">#81</a><a and </><a href="https://github.com/barrycumbie/sobieconference.org/issues/86" target="_blank">#86</a>
 - DB USER: <a href="https://github.com/barrycumbie/sobieconference.org/issues/98" target="_blank">#98</a>
 - DB ADMIN: <a href="https://github.com/barrycumbie/sobieconference.org/issues/78" target="_blank">#78, </a><a href="https://github.com/barrycumbie/sobieconference.org/issues/78" target="_blank">#78</a>
 - FRONT END: <a href="https://github.com/barrycumbie/sobieconference.org/issues/85" target="_blank">#85, </a><a href="https://github.com/barrycumbie/sobieconference.org/issues/87" target="_blank">#87, </a><a href="https://github.com/barrycumbie/sobieconference.org/issues/106" target="_blank">#106, </a><a href="https://github.com/barrycumbie/sobieconference.org/issues/110" target="_blank">#110</a>
