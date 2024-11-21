@@ -1,6 +1,6 @@
 
 ## Society of Busines, Industry, and Economics (SOBIE) website
-![version](https://img.shields.io/npm/v/sobieconference.org) ![Issues](https://img.shields.io/github/issues/barrycumbie/sobieconference.org) ![stars](https://img.shields.io/github/stars/sobieconference.org/readme-md?style=flat&color=yellow)
+![version](https://img.shields.io/npm/v/sobieconference.org) ![Issues](https://img.shields.io/github/issues/barry-cumbie/sobieconference.org) ![stars](https://img.shields.io/github/stars/sobieconference.org/readme-md?style=flat&color=yellow)
 
 ## Table of Contents
 - [Overview](#overview)
